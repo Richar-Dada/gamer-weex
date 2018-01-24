@@ -1,6 +1,6 @@
 <template>
-  <div @androidback="back">
-    <text>1111</text>
+  <div @androidback="back" class="root">
+    <router-view style="flex:1"></router-view>
   </div>
 </template>
 
