@@ -1,8 +1,7 @@
 <template>
   <wxc-tab-page ref="wxc-tab-page"
-                :tab-titles="tabTitles"
                 :tab-styles="tabStyles"
-                title-type="icon"
+                title-type="text"
                 :needSlider="needSlider"
                 :is-tab-view="isTabView"
                 :tab-page-height="tabPageHeight"
@@ -66,7 +65,6 @@
   export default {
     components: { WxcTabPage, WxcPanItem },
     data: () => ({
-      tabTitles: Config.tabTitles,
       tabStyles: Config.tabStyles,
       tabList: [],
       needSlider: true,
