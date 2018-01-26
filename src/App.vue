@@ -15,5 +15,5 @@
 </script>
 
 <style>
-  @import './assets/css/common.css'
+  @import './assets/css/common.css';
 </style>

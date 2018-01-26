@@ -4,7 +4,6 @@ const webpack = require('webpack');
 
 // web need vue-loader
 const plugins = [
-  new webpack.optimize.UglifyJsPlugin({minimize: true}),
   new webpack.BannerPlugin({
     banner: '// { "framework": "Vue" } \n',
     raw: true,
@@ -42,7 +41,7 @@ const weexConfig = {
   entry: { 'index': path.resolve('src', 'entry') },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: '[name].weex.js',
   },
   module: {
     rules: [
