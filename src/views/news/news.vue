@@ -1,5 +1,7 @@
 <template>
   <div>
+    
+    <i-header></i-header>
     <wxc-tab-page ref="wxc-tab-page"
                   :tab-titles="tabTitles"
                   :tab-styles="tabStyles"
@@ -62,12 +64,13 @@
 <script>
   const dom = weex.requireModule('dom');
   import { WxcTabPage, WxcPanItem, Utils } from 'weex-ui';
+  import IHeader from '../../components/header.vue'
 
   // https://github.com/alibaba/weex-ui/blob/master/example/tab-page/config.js
   import Config from './config'
 
   export default {
-    components: { WxcTabPage, WxcPanItem },
+    components: { WxcTabPage, WxcPanItem, IHeader },
     data: () => ({
       tabTitles: Config.tabTitles,
       tabStyles: Config.tabStyles,
@@ -79,7 +82,7 @@
       tabPageHeight: 1334
     }),
     created () {
-      this.tabPageHeight = Utils.env.getPageHeight();
+      this.tabPageHeight = Utils.env.getPageHeight() - 88;
       this.tabList = [...Array(this.tabTitles.length).keys()].map(i => []);
       console.log(this.tabTitles.length)
       console.log(...Array(this.tabTitles.length).keys())

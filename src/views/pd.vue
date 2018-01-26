@@ -1,9 +1,13 @@
 <template>
   <div>
+    <i-header></i-header>
     <text>pd</text>
   </div>
 </template>
 
 <script>
-  export default {}
+  import IHeader from '../components/header.vue'
+  export default {
+    components: { IHeader }
+  }
 </script>

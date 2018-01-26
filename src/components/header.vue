@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <text>Gamer</text>
+    <text class="header-text white-text">Gamer</text>
   </div>
 </template>
 
@@ -15,5 +15,10 @@
     background-color: #ed4040;
     justify-content: center;
     align-items: center;
+  }
+  .header-text{
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 700;
   }
 </style>

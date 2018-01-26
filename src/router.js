@@ -1,13 +1,14 @@
 import Router from 'vue-router'
-import lol from './views/lol.vue'
+import news from './views/news/news.vue'
 import pd from './views/pd.vue'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    { path: '/lol', component: lol },
+    { path: '/news', component: news },
     { path: '/pd', component: pd },
-    { path: '/', redirect: '/lol' }
+    { path: '/', redirect: '/news' },
+    { path:'*', redirect: '/'}
   ]
 })

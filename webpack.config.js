@@ -1,9 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 
 // web need vue-loader
 const plugins = [
+  new ExtractTextPlugin("styles.css"),
   new webpack.BannerPlugin({
     banner: '// { "framework": "Vue" } \n',
     raw: true,
@@ -20,6 +22,13 @@ const webConfig = {
   module: {
     // webpack 2.0 
     rules: [
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
+      },
       {
         test: /\.js$/,
         use: [{
@@ -45,6 +54,13 @@ const weexConfig = {
   },
   module: {
     rules: [
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
+      },
       {
         test: /\.js$/,
         use: [{
