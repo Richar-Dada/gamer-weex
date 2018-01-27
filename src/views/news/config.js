@@ -27,6 +27,13 @@ export default {
       activeIcon: 'https://gw.alicdn.com/tfs/TB1_Kc.SXXXXXa8XpXXXXXXXXXX-72-72.png'
     }
   ],
+  titleTag: [
+    'all',
+    'lol',
+    'pd',
+    'wzry',
+    'ls'
+  ],
   tabStyles: {
     bgColor: '#FFFFFF',
     titleColor: '#666666',

@@ -1,13 +1,11 @@
-const stream = weex.require('stream')
+const stream = weex.requireModule('stream')
 
-export function post (url, data) {
+export function get (url) {
   return new Promise((resolve, reject) => {
     stream.fetch({
-      method: 'POST',
+      method: 'GET',
       url: url,
-      type: 'json',
-      body: JSON.stringify(data),
-      header: { "Content-Type": 'application/json' }
+      type: 'json'
     }, function(ret) {
       let res = {}
       if (!ret.ok) {
@@ -16,7 +14,32 @@ export function post (url, data) {
         reject(res)
       } else {
         res.resultCode = ret.status
-        res.data = JSON.parse(ret.data)
+        res.data = ret.data
+        resolve(res)
+      }
+    })
+  })
+}
+
+export function post (url, data) {
+  console.log(data)
+  return new Promise((resolve, reject) => {
+    stream.fetch({
+      method: 'POST',
+      url: url,
+      type: 'json',
+      body: data,
+      headers: { "Content-Type": 'application/json' }
+    }, function(ret) {
+      let res = {}
+      if (!ret.ok) {
+        res.errMsg = 'request failed'
+        res.resultCode = '400'
+        reject(res)
+      } else {
+        res.resultCode = ret.status
+        res.data = ret.data
+        resolve(res)
       }
     })
   })

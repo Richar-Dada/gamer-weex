@@ -19,10 +19,10 @@
               class="cell"
               :key="key">
           <wxc-pan-item :ext-id="'1-' + (v) + '-' + (key)"
-                        url="https://h5.m.taobao.com/trip/ticket/detail/index.html?scenicId=2675"
+                        :url="demo.href"
                         @wxcPanItemPan="wxcPanItemPan">
           <div class="content">
-              <text>{{key}}</text>
+              <text>{{demo.title}}</text>
           </div>
           </wxc-pan-item>
         </cell>
@@ -64,10 +64,8 @@
 <script>
   const dom = weex.requireModule('dom');
   import { WxcTabPage, WxcPanItem, Utils } from 'weex-ui'
-  import { post } from '../../utils/stream'
+  import { get, post } from '../../utils/stream'
   import IHeader from '../../components/header.vue'
-
-  // https://github.com/alibaba/weex-ui/blob/master/example/tab-page/config.js
   import Config from './config'
 
   export default {
@@ -85,13 +83,11 @@
     created () {
       this.tabPageHeight = Utils.env.getPageHeight() - 88;
       this.tabList = [...Array(this.tabTitles.length).keys()].map(i => []);
-      console.log(this.tabTitles.length)
-      console.log(...Array(this.tabTitles.length).keys())
-      console.log(this.tabList)
       Vue.set(this.tabList, 0, this.demoList);
-      post('http://www.zicong.site:3888/api/v1/news', { tag: 'lol', page: '2' })
+      get('http://192.168.15.191:7001/api/v1/news')
         .then((res) => {
           console.log(res)
+          Vue.set(this.tabList, 0, res.data);
         })
     },
     methods: {
@@ -101,11 +97,14 @@
         console.log(e.page)
         /* Unloaded tab analog data request */
         if (!Utils.isNonEmptyArray(self.tabList[index])) {
-          setTimeout(() => {
-            Vue.set(self.tabList, index, self.demoList);
-          }, 100);
+          post('http://192.168.15.191:7001/api/v1/news', JSON.stringify({tag: Config.titleTag[index], page: 1}))
+            .then((res) => {
+              setTimeout(() => {
+                Vue.set(self.tabList, index, res.data);
+              }, 100);
+            })
+          
         }
-        console.log(self.tabList)
       },
       wxcPanItemPan (e) {
         if (Utils.env.supportsEBForAndroid()) {
