@@ -63,7 +63,8 @@
 </style>
 <script>
   const dom = weex.requireModule('dom');
-  import { WxcTabPage, WxcPanItem, Utils } from 'weex-ui';
+  import { WxcTabPage, WxcPanItem, Utils } from 'weex-ui'
+  import { post } from '../../utils/stream'
   import IHeader from '../../components/header.vue'
 
   // https://github.com/alibaba/weex-ui/blob/master/example/tab-page/config.js
@@ -88,17 +89,23 @@
       console.log(...Array(this.tabTitles.length).keys())
       console.log(this.tabList)
       Vue.set(this.tabList, 0, this.demoList);
+      post('http://www.zicong.site:3888/api/v1/news', { tag: 'lol', page: '2' })
+        .then((res) => {
+          console.log(res)
+        })
     },
     methods: {
       wxcTabPageCurrentTabSelected (e) {
         const self = this;
         const index = e.page;
+        console.log(e.page)
         /* Unloaded tab analog data request */
         if (!Utils.isNonEmptyArray(self.tabList[index])) {
           setTimeout(() => {
             Vue.set(self.tabList, index, self.demoList);
           }, 100);
         }
+        console.log(self.tabList)
       },
       wxcPanItemPan (e) {
         if (Utils.env.supportsEBForAndroid()) {
