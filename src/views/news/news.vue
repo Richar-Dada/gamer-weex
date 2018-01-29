@@ -22,7 +22,10 @@
                         :url="demo.href"
                         @wxcPanItemPan="wxcPanItemPan">
           <div class="content">
-              <text>{{demo.title}}</text>
+              <div class="tag">
+                <text class="tag-text">hot</text>
+              </div>
+              <text class="news-title font-28">{{demo.title}}</text>
           </div>
           </wxc-pan-item>
         </cell>
@@ -55,10 +58,42 @@
   
   .content{
     width:750px;
-    height:300px;
+    height:120px;
     border-bottom-width:1px;
     align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    padding-left: 20px;
+  }
+  .news-title{
+    margin-left: 20px;
+  }
+  .tag{
+    width: 80px;
+    height: 40px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     justify-content: center;
+    align-items: center;
+    background-color: rgb(237, 64, 64);
+  }
+  .tag-text{
+    color: #ffffff;
+    font-size: 24px;
+  }
+  .font-24{
+    font-size: 24px;
+  }
+  .font-26{
+    font-size: 26px;
+  }
+  .font-28{
+    font-size: 28px;
+  }
+  .font-30{
+    font-size: 30px;
   }
 </style>
 <script>
@@ -84,7 +119,7 @@
       this.tabPageHeight = Utils.env.getPageHeight() - 88;
       this.tabList = [...Array(this.tabTitles.length).keys()].map(i => []);
       Vue.set(this.tabList, 0, this.demoList);
-      get('http://192.168.15.191:7001/api/v1/news')
+      get('http://localhost:7001/api/v1/news')
         .then((res) => {
           console.log(res)
           Vue.set(this.tabList, 0, res.data);
